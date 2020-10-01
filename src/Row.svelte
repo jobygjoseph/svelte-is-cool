@@ -90,17 +90,17 @@
   const aimImg = data?.AimsImage?.url?.primary;
 
   const clSrc = getCloudinaryImageSrc(clImg, flKey);
-  const aimSrc = getAimsUrlFlavor(aimImg, { width: 500, flavor: flKey });
+  const aimSrc = getAimsUrlFlavor(aimImg, { width: 500, flavor: flVal });
 </script>
 
 <style>
   img {
-    width: 100%;
+    max-width: 100%;
   }
 </style>
 
 <Grid xs={2} md={1} lg={1}><strong>{flKey}</strong></Grid>
 
-<Grid xs={2} md={1} lg={1}>Cloudinary: <img src={clSrc} alt={flKey} /></Grid>
+<Grid xs={2} md={1} lg={1}><img src={clSrc} alt={flKey} /></Grid>
 
-<Grid xs={2} md={1} lg={1}>Aims: <img src={aimSrc} alt={flKey} /></Grid>
+<Grid xs={2} md={1} lg={1}><img src={aimSrc} alt={flKey} /></Grid>

@@ -101,6 +101,15 @@
 	</Grid>
 	<Out nostatus from={GET_IMAGE_INFO} let:data>
 		<Grid container gutter={6} columns={3}>
+			<Grid xs={2} md={1} lg={1}>
+				<h2>Flavor</h2>
+			</Grid>
+			<Grid xs={2} md={1} lg={1}>
+				<h2>Cloudinary</h2>
+			</Grid>
+			<Grid xs={2} md={1} lg={1}>
+				<h2>Aims</h2>
+			</Grid>
 			{#each aimsFlavors as flavor}
 				<Row {flavor} {data} />
 			{/each}
