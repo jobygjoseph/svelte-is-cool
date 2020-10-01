@@ -7,10 +7,19 @@
 
 	const aimsFlavors = Object.entries(AIMS_FLAVORS);
 	let imageID = "rcim160";
+	let subDomains = "uat";
 
 	setupClient({
-		url: "https://uat.newsdigitalapi.com/",
+		url: `https://${subDomains}.newsdigitalapi.com/`,
 	});
+
+	function onSubDomainChange(event) {
+		const sd = event.currentTarget.value;
+		console.log("sd: %s", sd);
+		setupClient({
+			url: `https://${sd}.newsdigitalapi.com/`,
+		});
+	}
 
 	const GET_IMAGE_INFO = `
     query getImages($imageID: ID!) {
@@ -56,7 +65,40 @@
 
 <main>
 	<h1>Cloundinary VERSUS AIMS!!</h1>
-	<input bind:value={imageID} />
+	<Grid container gutter={6} columns={6}>
+		<Grid xs={2} md={1} lg={1} />
+		<Grid xs={4} md={2} lg={1}>
+			<label>
+				<input
+					type="radio"
+					bind:group={subDomains}
+					on:change={onSubDomainChange}
+					value="www" />
+				Prod
+			</label>
+		</Grid>
+		<Grid xs={2} md={1} lg={1}>
+			<label>
+				<input
+					type="radio"
+					bind:group={subDomains}
+					on:change={onSubDomainChange}
+					value="staging" />
+				Staging
+			</label>
+		</Grid>
+		<Grid xs={2} md={1} lg={1}>
+			<label>
+				<input
+					type="radio"
+					bind:group={subDomains}
+					on:change={onSubDomainChange}
+					value="uat" />
+				UAT
+			</label>
+		</Grid>
+		<Grid xs={2} md={1} lg={1}><input bind:value={imageID} /></Grid>
+	</Grid>
 	<Out nostatus from={GET_IMAGE_INFO} let:data>
 		<Grid container gutter={6} columns={3}>
 			{#each aimsFlavors as flavor}
